@@ -1,0 +1,96 @@
+<div class="global-block">
+    <div class="container-explain">
+        <div class="container-explain__title-explain">
+            Коротко про <span class='container-explain__text-logo'>LEW</span> 
+        </div>
+        <div class="container-explain__block-for-image">
+            <img class="container-explain__foto" src="../../assets/images/main-foto.jpg" alt="">
+        </div>
+        <div class="container-explain__text-explain">
+            <span class='container-explain__text-logo'>LEW</span> 
+            translate as - Learn English Words.
+            Site give a good knowledge english words. 
+            We will give access after registration and then we can use our site in full access.
+            <em>
+                How working our site:
+            </em>
+            after that as you registered, you can enter any words and them translate, then click next
+            and you will need pass task that learn those word how you enter earlier, and that all what do you will need do. 
+        </div>
+    </div>
+    <div class="container-for-sign-and-log">
+        <div class="container-for-sign-and-log__block-for-log">
+            <div class="container-for-sign-and-log__title-log">
+                {{ typeEnter }}
+            </div>
+            <hr>
+            <div class="container-for-sign-and-log__block-for-inputs">
+                <div class="container-for-sign-and-log__block-inputs">
+                    <form #form='ngForm'>
+                        <input 
+                            *ngIf='!singInOrLogIn'
+                            placeholder="Name..." 
+                            type="text" 
+                            required
+                            class="container-for-sign-and-log__input"
+                            #name='ngModel'
+                            name="name"
+                            [(ngModel)]='dataRegister.dataName' 
+                            [ngClass]='{ "container-for-sign-and-log__required": showErrorsInput ? (name.errors?.required) : false  }' 
+                            full-name>
+                        <input 
+                            placeholder="Email..." 
+                            type="email" 
+                            required
+                            multiple
+                            class="container-for-sign-and-log__input"
+                            #email='ngModel'
+                            name="email"
+                            (keyup)='checkValueEmail($event.target.value)'
+                            [(ngModel)]='dataRegister.dataEmail' 
+                            [ngClass]='{ "container-for-sign-and-log__required": showErrorsInput ? (email.errors?.required) : false  }'>
+                        <input 
+                            placeholder="Password..." 
+                            type="password" 
+                            required
+                            minlength="6"
+                            class="container-for-sign-and-log__input"
+                            #password='ngModel'
+                            name="password"
+                            [(ngModel)]='dataRegister.dataPassword' 
+                            [ngClass]='{ "container-for-sign-and-log__required": showErrorsInput ? (password.errors?.required) : false  }'>
+                        <div class="container-for-sign-and-log__block-for-batton-log">
+                            <input 
+                                *ngIf='!singInOrLogIn'
+                                type="submit"
+                                class="container-for-sign-and-log__button"
+                                (click)='registerClient()'
+                                [disabled]='form.invalid || password.errors?.minlength'
+                                [value]="typeEnter"
+                                title="Fill in all input"
+                            >
+                            <input 
+                                *ngIf='singInOrLogIn'
+                                type="submit"
+                                class="container-for-sign-and-log__button-sign-in"
+                                (click)='registerClient()'
+                                [disabled]='form.invalid || password.errors?.minlength'
+                                [value]="typeEnter"
+                                title="Fill in all input"
+                            >
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+            <div class="span-error" *ngIf='displayError'>User with that account already exist</div>
+            <hr>
+            <div class="container-for-sign-and-log__block-for-sign">
+                <div class="container-for-sign-and-log__button-sign"
+                (click)='changeTypeEnter()' >
+                    {{actionWithAccount}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
