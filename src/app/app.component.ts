@@ -10,13 +10,18 @@ export class AppComponent implements OnInit{
 
   constructor( private router: Router ){}
   textButtonEnter:string = '';
+  blockContactsDispaly:boolean = true;
 
   ngOnInit(){
     this.router.events.subscribe(data=>{
       if( data instanceof NavigationEnd ) {
         if(data.url === "/register"){
           this.textButtonEnter = "Log In"
-        } else this.textButtonEnter = "Sing out"
+        } else this.textButtonEnter = "Sing out";
+
+        if( data.url === '/home' ) {
+          this.blockContactsDispaly = false
+        }
       }
     })
   }
